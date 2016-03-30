@@ -1,13 +1,13 @@
-CREATE PROCEDURE [select_languages_sp]
-	@ilanguage_id INT = NULL
+CREATE PROCEDURE [select_Idioms_sp]
+	@iIdiomId INT = NULL
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		IF (@ilanguage_id is NULL)
-			SELECT * FROM [languages_t]
+		IF (@iIdiomId is NULL)
+			SELECT * FROM [Idiom]
 		ELSE
-			SELECT * FROM [languages_t] WHERE @ilanguage_id = @ilanguage_id
+			SELECT * FROM [Idiom] WHERE @iIdiomId = @iIdiomId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -15,13 +15,13 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [insert_language_sp]
-	@ilanguage VARCHAR(50)
+CREATE PROCEDURE [insert_Idiom_sp]
+	@iIdiom VARCHAR(50)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		INSERT INTO [languages_t] (language) VALUES (@ilanguage)
+		INSERT INTO [Idiom] (Idiom) VALUES (@iIdiom)
 	END TRY
 	BEGIN CATCH 
 	SELECT error_message()
@@ -30,16 +30,16 @@ END
 
 GO
 
-CREATE PROCEDURE [update_language_sp]
-	@ilanguage_id INT,
-	@ilanguage VARCHAR(50)
+CREATE PROCEDURE [update_Idiom_sp]
+	@iIdiomId INT,
+	@iIdiom VARCHAR(50)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		UPDATE  [languages_t] 
-		SET language = @ilanguage
-		WHERE language_id = @ilanguage_id
+		UPDATE  [Idiom] 
+		SET Idiom = @iIdiom
+		WHERE IdiomId = @iIdiomId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -48,13 +48,13 @@ END
 
 GO
 
-CREATE PROCEDURE [delete_language_sp]
-	@ilanguage_id INT
+CREATE PROCEDURE [delete_Idiom_sp]
+	@iIdiomId INT
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		DELETE FROM [languages_t] WHERE language_id = @ilanguage_id
+		DELETE FROM [Idiom] WHERE IdiomId = @iIdiomId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -65,15 +65,15 @@ GO
 
 --
 
-CREATE PROCEDURE [select_category_sp]
-	@icategory_id INT = NULL
+CREATE PROCEDURE [select_Category_sp]
+	@iCategoryId INT = NULL
 AS BEGIN
 	SET NOCOUNT OFF
 	BEGIN TRY
-	IF (@icategory_id is NULL)
-		SELECT * FROM [categories_t]
+	IF (@iCategoryId is NULL)
+		SELECT * FROM [Category]
 	ELSE
-		SELECT * FROM [categories_t] WHERE category_id = @icategory_id
+		SELECT * FROM [Category] WHERE CategoryId = @iCategoryId
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -82,12 +82,12 @@ END
 
 GO
 
-CREATE PROCEDURE [insert_category_sp]
-	@icategory VARCHAR(50)
+CREATE PROCEDURE [insert_Category_sp]
+	@iCategory VARCHAR(50)
 AS BEGIN
 	SET NOCOUNT OFF
 	BEGIN TRY
-		INSERT INTO [categories_t](category) values (@icategory)
+		INSERT INTO [Category](Category) values (@iCategory)
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -96,15 +96,15 @@ END
 
 GO
 
-CREATE PROCEDURE [update_category_sp]
-	@icategory_id INT,
-	@icategory VARCHAR(50)
+CREATE PROCEDURE [update_Category_sp]
+	@iCategoryId INT,
+	@iCategory VARCHAR(50)
 AS BEGIN
 	SET NOCOUNT OFF
 	BEGIN TRY
-		UPDATE [categories_t] 
-		SET category = @icategory
-		WHERE category_id = @icategory_id
+		UPDATE [Category] 
+		SET Category = @iCategory
+		WHERE CategoryId = @iCategoryId
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -113,12 +113,12 @@ END
 
 GO
 
-CREATE PROCEDURE [delete_category_sp]
-	@icategory_id INT
+CREATE PROCEDURE [delete_Category_sp]
+	@iCategoryId INT
 AS BEGIN
 	SET NOCOUNT OFF
 	BEGIN TRY
-		DELETE FROM [categories_t] WHERE category_id = @icategory_ID
+		DELETE FROM [Category] WHERE CategoryId = @iCategoryId
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -130,13 +130,13 @@ GO
 
 
 
-CREATE PROCEDURE [rm_inserta_country_sp]
-@icountry VARCHAR(50)
+CREATE PROCEDURE [rm_inserta_Country_sp]
+@iCountry VARCHAR(50)
 AS 
 BEGIN SET NOCOUNT OFF 
 BEGIN TRY
-Insert INTO [countries_t] (country)
-values (@icountry)
+Insert INTO [Country] (Country)
+values (@iCountry)
 END TRY
 BEGIN CATCH
 SELECT error_message()
@@ -151,15 +151,15 @@ GO
 
 --
 
-CREATE PROCEDURE [select_country_sp]
-	@icountry_id INT = NULL
+CREATE PROCEDURE [select_Country_sp]
+	@iCountryId INT = NULL
 AS BEGIN 
 	SET NOCOUNT OFF 
 	BEGIN TRY
-		IF (@icountry_id is NULL)
-			SELECT * FROM [countries_t];
+		IF (@iCountryId is NULL)
+			SELECT * FROM [Country];
 		ELSE
-			SELECT * FROM [countries_t] WHERE country_id = @icountry_id;
+			SELECT * FROM [Country] WHERE CountryId = @iCountryId;
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -168,15 +168,15 @@ END
 
 GO
 
-CREATE PROCEDURE [update_country_sp]
-	@icountry_id INT,
-	@icountry VARCHAR(50)
+CREATE PROCEDURE [update_Country_sp]
+	@iCountryId INT,
+	@iCountry VARCHAR(50)
 AS BEGIN 
 	SET NOCOUNT OFF 
 	BEGIN TRY
-		UPDATE [countries_t] 
-		SET country = @icountry
-		WHERE country_id = @icountry_id
+		UPDATE [Country] 
+		SET Country = @iCountry
+		WHERE CountryId = @iCountryId
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -185,12 +185,12 @@ END
 
 GO
 
-CREATE PROCEDURE [delete_country_sp]
-	@icountry_id INT
+CREATE PROCEDURE [delete_Country_sp]
+	@iCountryId INT
 AS BEGIN 
 	SET NOCOUNT OFF 
 	BEGIN TRY
-		DELETE FROM [countries_t] WHERE country_id = @icountry_id 
+		DELETE FROM [Country] WHERE CountryId = @iCountryId 
 	END TRY
 	BEGIN CATCH
 		SELECT error_message()
@@ -219,13 +219,13 @@ END
 GO
 
 CREATE PROCEDURE [insert_artist_sp]
-	@ifirst_name VARCHAR(50),
-	@ilast_name VARCHAR(50), 	
-	@icountry_id INT 
+	@iFirstName VARCHAR(50),
+	@iLastName VARCHAR(50), 	
+	@iCountryId INT 
 AS BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		INSERT INTO [artists_t] (first_name,last_name, country_id) VALUES (@ifirst_name, @ilast_name, @icountry_id)
+		INSERT INTO [artists_t] (FirstName,LastName, CountryId) VALUES (@iFirstName, @iLastName, @iCountryId)
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -236,16 +236,16 @@ GO
 
 CREATE PROCEDURE [update_artist_sp]
 	@iartist_id INT,
-	@ifirst_name VARCHAR(50),
-	@ilast_name VARCHAR(50), 	
-	@icountry_id INT 
+	@iFirstName VARCHAR(50),
+	@iLastName VARCHAR(50), 	
+	@iCountryId INT 
 AS BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
 		UPDATE  [artists_t] 
-		SET first_name = @ifirst_name,
-			last_name = @ilast_name,
-			country_id = @icountry_id
+		SET FirstName = @iFirstName,
+			LastName = @iLastName,
+			CountryId = @iCountryId
 		WHERE artist_id = @iartist_id
 	END TRY
 	BEGIN CATCH 
@@ -273,15 +273,15 @@ GO
 
 
 CREATE PROCEDURE [rm_consulta_song_sp]
-@isong_id INT = NULL
+@iSongId INT = NULL
 AS
 BEGIN
 SET NOCOUNT OFF;
 BEGIN TRY
-IF (@isong_id is NULL)
+IF (@iSongId is NULL)
 	SELECT * FROM rm_songes_t
 ELSE
-	SELECT * FROM rm_songes_t WHERE song_id = @isong_id
+	SELECT * FROM rm_songes_t WHERE SongId = @iSongId
 END TRY
 BEGIN CATCH 
 SELECT error_message()
@@ -294,16 +294,16 @@ GO
 
 CREATE PROCEDURE [insert_song_sp]
 @isong VARCHAR(50),
-@ilyrics TEXT, 
-@iauthor VARCHAR(50), 
-@icategory_id INT, 
-@ilanguage_id INT 
+@iLyrics TEXT, 
+@iAuthor VARCHAR(50), 
+@iCategoryId INT, 
+@iIdiomId INT 
 AS 
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		INSERT INTO [songs_t] ( song, lyrics, author, category_id, language_id) 
-		VALUES ( @isong, @ilyrics, @iauthor, @icategory_id, @ilanguage_id)
+		INSERT INTO [Song] ( song, Lyrics, Author, CategoryId, IdiomId) 
+		VALUES ( @isong, @iLyrics, @iAuthor, @iCategoryId, @iIdiomId)
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -313,23 +313,23 @@ END
 GO
 
 CREATE PROCEDURE [update_song_sp]
-	@isong_id INT,
+	@iSongId INT,
 	@isong VARCHAR(50),
-	@ilyrics TEXT, 
-	@iauthor VARCHAR(50), 
-	@icategory_id INT, 
-	@ilanguage_id INT 
+	@iLyrics TEXT, 
+	@iAuthor VARCHAR(50), 
+	@iCategoryId INT, 
+	@iIdiomId INT 
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		UPDATE  [songs_t] 
+		UPDATE  [Song] 
 		SET song = @isong,
-		lyrics = @ilyrics,
-		author = @iauthor,
-		category_id = @icategory_id,
-		language_id = @ilanguage_id
-		WHERE song_id = @isong_id
+		Lyrics = @iLyrics,
+		Author = @iAuthor,
+		CategoryId = @iCategoryId,
+		IdiomId = @iIdiomId
+		WHERE SongId = @iSongId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -339,12 +339,12 @@ END
 GO
 
 CREATE PROCEDURE [delete_song_sp]
-@isong_id INT
+@iSongId INT
 AS
 	BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		DELETE FROM [songs_t] WHERE song_id = @isong_id
+		DELETE FROM [Song] WHERE SongId = @iSongId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -355,16 +355,16 @@ GO
 
 --
 
-CREATE PROCEDURE [select_discography_sp]
-	@idiscography_id INT = nul
+CREATE PROCEDURE [select_Album_sp]
+	@iAlbumId INT = nul
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		IF (@idiscography_id is NULL)
+		IF (@iAlbumId is NULL)
 			SELECT * FROM rm_dicografia_t
 		ELSE
-			SELECT * FROM [discography_t] WHERE discography_id = @idiscography_id
+			SELECT * FROM [Album] WHERE AlbumId = @iAlbumId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -373,19 +373,19 @@ END
 
 GO
 
-CREATE PROCEDURE [insert_discography_sp]
+CREATE PROCEDURE [insert_Album_sp]
 	@iartist_id INT,
-	@isong_id INT,
-	@idiscography_id INT,
-	@idiscography VARCHAR(50),
-	@itrack_number INT,
-	@ilength TIME
+	@iSongId INT,
+	@iAlbumId INT,
+	@iAlbum VARCHAR(50),
+	@iTrackNum INT,
+	@iLength TIME
 AS
 BEGIN 
 	SET NOCOUNT OFF
 	BEGIN TRY
-		INSERT INTO [discography_t] ([artist_id],[song_id],[discography_id], [discography],[track_number],[length]) 
-		VALUES (@iartist_id,@isong_id,@idiscography_id,@idiscography,@itrack_number,@ilength)
+		INSERT INTO [Album] ([ArtistId,[SongId],[AlbumId], [Album],[TrackNum],[Length]) 
+		VALUES (@iartist_id,@iSongId,@iAlbumId,@iAlbum,@iTrackNum,@iLength)
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -394,24 +394,24 @@ END
 
 GO
 
-CREATE PROCEDURE [update_discography_sp]
+CREATE PROCEDURE [update_Album_sp]
 	@iartist_id INT,
-	@isong_id INT,
-	@idiscography_id INT,
-	@idiscography VARCHAR(50),
-	@itrack_number INT,
-	@ilength TIME
+	@iSongId INT,
+	@iAlbumId INT,
+	@iAlbum VARCHAR(50),
+	@iTrackNum INT,
+	@iLength TIME
 AS
 BEGIN 
 	SET NOCOUNT OFF
 	BEGIN TRY
-		UPDATE  [discography_t] 
+		UPDATE  [Album] 
 		SET artist_id = @iartist_id,
-		song_id = @isong_id,
-		discography = @idiscography,
-		track_number = @itrack_number,
-		length = @ilength
-		WHERE discography_id = @idiscography_id
+		SongId = @iSongId,
+		Album = @iAlbum,
+		TrackNum = @iTrackNum,
+		Length = @iLength
+		WHERE AlbumId = @iAlbumId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -420,13 +420,13 @@ END
 
 GO
 
-CREATE PROCEDURE [delete_discography_sp]
-	@idiscography_id INT
+CREATE PROCEDURE [delete_Album_sp]
+	@iAlbumId INT
 AS
 	BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		DELETE FROM [discography_t] WHERE discography_id = @idiscography_id
+		DELETE FROM [Album] WHERE AlbumId = @iAlbumId
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
