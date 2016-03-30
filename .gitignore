@@ -1,0 +1,39 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.sln.targets
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+*.generated.cs
+*.js.map
+*1?.sln
+_AllEdited.proj
+_lastlocalbuild.cmd
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+*.meta
+*.obj
+*.pdb
+*.tlb
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.scc
