@@ -269,19 +269,16 @@
     <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Idioms\Create.cshtml" />
     <Content Include="Views\Idioms\Delete.cshtml" />
     <Content Include="Views\Idioms\Details.cshtml" />
     <Content Include="Views\Idioms\Edit.cshtml" />
     <Content Include="Views\Idioms\Index.cshtml" />
-=======
     <Content Include="Views\Songs\Create.cshtml" />
     <Content Include="Views\Songs\Delete.cshtml" />
     <Content Include="Views\Songs\Details.cshtml" />
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
->>>>>>> 20fb365... Songs Controller
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
