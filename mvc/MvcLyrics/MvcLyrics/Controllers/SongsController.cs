@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MvcLyrics.Models;
 
@@ -29,6 +24,7 @@ namespace MvcLyrics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Song song = await db.Songs.FindAsync(id);
             if (song == null)
             {
@@ -123,6 +119,25 @@ namespace MvcLyrics.Controllers
             db.Songs.Remove(song);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> Show(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Song song = await db.Songs.FindAsync(id);
+
+            if (song == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Title = song.SongName;
+
+            return View(song);
         }
 
         protected override void Dispose(bool disposing)

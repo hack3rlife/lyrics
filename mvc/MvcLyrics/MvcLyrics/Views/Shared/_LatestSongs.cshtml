@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MvcLyrics.Models.Song>
+
+<ul>
+    @foreach (var item in Model)
+    {
+
+        <li>@Html.ActionLink(item.SongName, "Show", "Songs", new { id = item.SongId }, null)</li>
+    }
+
+</ul>

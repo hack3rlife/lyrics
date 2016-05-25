@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MvcLyrics.Models;
 
@@ -18,7 +14,7 @@ namespace MvcLyrics.Controllers
         // GET: Artists
         public async Task<ActionResult> Index()
         {
-            var artists = db.Artists.Include(a => a.Country);
+            var artists = db.Artists.Include(a => a.Country).Take(10);
             return View(await artists.ToListAsync());
         }
 
@@ -119,6 +115,22 @@ namespace MvcLyrics.Controllers
             db.Artists.Remove(artist);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> Show(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist artist = await db.Artists.FindAsync(id);            
+
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(artist);
         }
 
         protected override void Dispose(bool disposing)

@@ -125,6 +125,22 @@ namespace MvcLyrics.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<ActionResult> Show(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Album album = await db.Albums.FindAsync(id);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+
+            
+            return View(album);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

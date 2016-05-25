@@ -1,0 +1,49 @@
+﻿@*@model IEnumerable<MvcLyrics.Models.Artist>*@
+
+@model PagedList.IPagedList<MvcLyrics.Models.Artist>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+    @Html.Partial("~/Views/Shared/_AbcNav.cshtml")
+</div>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @using (Html.BeginForm("Index", "Search",FormMethod.Get))
+    {
+        <p>Search by @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)<input type="submit" value="Search" /></p>
+    }
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.ActionLink( "Name", "Index", new { sortOrder = ViewBag.SortOrder, currentFilter = ViewBag.CurrentFilter })
+        </th>       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.ActionLink(item.FirstName, "Show", "Artists", new { id = item.ArtistId }, null)
+        </td>               
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.TotalItemCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", 
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))

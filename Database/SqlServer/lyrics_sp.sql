@@ -219,13 +219,13 @@ END
 GO
 
 CREATE PROCEDURE [insert_artist_sp]
-	@iFirstName VARCHAR(50),
+	@iName VARCHAR(50),
 	@iLastName VARCHAR(50), 	
 	@iCountryId INT 
 AS BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
-		INSERT INTO [artists_t] (FirstName,LastName, CountryId) VALUES (@iFirstName, @iLastName, @iCountryId)
+		INSERT INTO [artists_t] (Name,LastName, CountryId) VALUES (@iName, @iLastName, @iCountryId)
 	END TRY
 	BEGIN CATCH 
 		SELECT error_message()
@@ -236,14 +236,14 @@ GO
 
 CREATE PROCEDURE [update_artist_sp]
 	@iartist_id INT,
-	@iFirstName VARCHAR(50),
+	@iName VARCHAR(50),
 	@iLastName VARCHAR(50), 	
 	@iCountryId INT 
 AS BEGIN
 	SET NOCOUNT OFF;
 	BEGIN TRY
 		UPDATE  [artists_t] 
-		SET FirstName = @iFirstName,
+		SET Name = @iName,
 			LastName = @iLastName,
 			CountryId = @iCountryId
 		WHERE artist_id = @iartist_id

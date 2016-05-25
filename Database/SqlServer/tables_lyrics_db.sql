@@ -4,8 +4,7 @@ USE [lyicsdb]
 CREATE TABLE [Artist]
 (
  [ArtistId] INT IDENTITY(1,1) NOT NULL,
- [FirstName] VARCHAR(50) NOT NULL,
- [LastName] VARCHAR(50) NULL,
+ [Name] VARCHAR(255) NOT NULL, 
  [CountryId] INT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
  [CreatedBy] VARCHAR(50) NULL,
@@ -21,7 +20,7 @@ GO
 CREATE TABLE [Country]
 (
  [CountryId] INT IDENTITY(1,1) NOT NULL,
- [CountryName] VARCHAR(50) NOT NULL,
+ [CountryName] VARCHAR(255) NOT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
  [CreatedBy] VARCHAR(50) NULL,
  [LastUpdate] DATETIME,
@@ -66,9 +65,9 @@ GO
 CREATE TABLE [Song]
 (
  [SongId] INT IDENTITY(1,1) NOT NULL,
- [SongName] VARCHAR(50) NOT NULL,
+ [SongName] VARCHAR(255) NOT NULL,
  [Lyrics] TEXT NOT NULL,
- [Author] VARCHAR(50) NULL,
+ [Author] VARCHAR(255) NULL,
  [CategoryId] INT NULL,
  [IdiomId] INT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
@@ -87,7 +86,7 @@ CREATE TABLE [Album]
  [ArtistId] INT NOT NULL,
  [SongId] INT NOT NULL,
  [AlbumId] INT IDENTITY(1,1) NOT NULL,
- [AlbumName] VARCHAR(50) NOT NULL,
+ [AlbumName] VARCHAR(255) NOT NULL,
  [TrackNum] INT NULL,
  [Length] TIME NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
