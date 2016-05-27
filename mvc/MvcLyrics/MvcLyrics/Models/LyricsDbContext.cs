@@ -12,12 +12,34 @@ namespace MvcLyrics.Models
         {
         }
 
-        public virtual DbSet<Album> Albums { get; set; }
-        public virtual DbSet<Artist> Artists { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Idiom> Idioms { get; set; }
-        public virtual DbSet<Song> Songs { get; set; }
+        public virtual DbSet<Album> Albums
+        {
+            get; set;
+        }
+        public virtual DbSet<Artist> Artists
+        {
+            get; set;
+        }
+        public virtual DbSet<Category> Categories
+        {
+            get; set;
+        }
+        public virtual DbSet<Country> Countries
+        {
+            get; set;
+        }
+        public virtual DbSet<Discography> Discographies
+        {
+            get; set;
+        }
+        public virtual DbSet<Idiom> Idioms
+        {
+            get; set;
+        }
+        public virtual DbSet<Song> Songs
+        {
+            get; set;
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,6 +54,11 @@ namespace MvcLyrics.Models
             modelBuilder.Entity<Album>()
                 .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Album>()
+                .HasMany(e => e.Discographies)
+                .WithRequired(e => e.Album)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Artist>()
                 .Property(e => e.FirstName)
@@ -50,7 +77,7 @@ namespace MvcLyrics.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Artist>()
-                .HasMany(e => e.Albums)
+                .HasMany(e => e.Discographies)
                 .WithRequired(e => e.Artist)
                 .WillCascadeOnDelete(false);
 
@@ -75,6 +102,14 @@ namespace MvcLyrics.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Country>()
+                .Property(e => e.UpdatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Discography>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Discography>()
                 .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
@@ -111,7 +146,7 @@ namespace MvcLyrics.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Song>()
-                .HasMany(e => e.Albums)
+                .HasMany(e => e.Discographies)
                 .WithRequired(e => e.Song)
                 .WillCascadeOnDelete(false);
         }

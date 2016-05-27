@@ -9,27 +9,17 @@ namespace MvcLyrics.Models
     [Table("Album")]
     public partial class Album
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ArtistId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Album()
+        {
+            Discographies = new HashSet<Discography>();
+        }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SongId { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
         public int AlbumId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string AlbumName { get; set; }
-
-        public int? TrackNum { get; set; }
-
-        public TimeSpan? Length { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -41,8 +31,7 @@ namespace MvcLyrics.Models
         [StringLength(50)]
         public string UpdatedBy { get; set; }
 
-        public virtual Artist Artist { get; set; }
-
-        public virtual Song Song { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discography> Discographies { get; set; }
     }
 }

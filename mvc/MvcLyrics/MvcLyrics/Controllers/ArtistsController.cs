@@ -123,13 +123,14 @@ namespace MvcLyrics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = await db.Artists.FindAsync(id);            
+            Artist artist = await db.Artists.FindAsync(id);
 
             if (artist == null)
             {
                 return HttpNotFound();
             }
 
+            ViewBag.Title = artist.FirstName;
             return View(artist);
         }
 

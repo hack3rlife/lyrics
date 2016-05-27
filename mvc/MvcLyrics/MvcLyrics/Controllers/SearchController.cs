@@ -105,8 +105,6 @@ namespace MvcLyrics.Controllers
                 default:
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            return View();
         }
 
         protected override void Dispose(bool disposing)

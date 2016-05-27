@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MvcLyrics.Models;
 
@@ -18,8 +13,7 @@ namespace MvcLyrics.Controllers
         // GET: Albums
         public async Task<ActionResult> Index()
         {
-            var albums = db.Albums.Include(a => a.Artist).Include(a => a.Song);
-            return View(await albums.ToListAsync());
+            return View(await db.Albums.ToListAsync());
         }
 
         // GET: Albums/Details/5
@@ -40,8 +34,6 @@ namespace MvcLyrics.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "FirstName");
-            ViewBag.SongId = new SelectList(db.Songs, "SongId", "SongName");
             return View();
         }
 
@@ -50,7 +42,7 @@ namespace MvcLyrics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ArtistId,SongId,AlbumId,AlbumName,TrackNum,Length,CreatedDate,CreatedBy,LastUpdate,UpdatedBy")] Album album)
+        public async Task<ActionResult> Create([Bind(Include = "AlbumId,AlbumName,CreatedDate,CreatedBy,LastUpdate,UpdatedBy")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +51,6 @@ namespace MvcLyrics.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "FirstName", album.ArtistId);
-            ViewBag.SongId = new SelectList(db.Songs, "SongId", "SongName", album.SongId);
             return View(album);
         }
 
@@ -76,8 +66,6 @@ namespace MvcLyrics.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "FirstName", album.ArtistId);
-            ViewBag.SongId = new SelectList(db.Songs, "SongId", "SongName", album.SongId);
             return View(album);
         }
 
@@ -86,7 +74,7 @@ namespace MvcLyrics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ArtistId,SongId,AlbumId,AlbumName,TrackNum,Length,CreatedDate,CreatedBy,LastUpdate,UpdatedBy")] Album album)
+        public async Task<ActionResult> Edit([Bind(Include = "AlbumId,AlbumName,CreatedDate,CreatedBy,LastUpdate,UpdatedBy")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +82,6 @@ namespace MvcLyrics.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "FirstName", album.ArtistId);
-            ViewBag.SongId = new SelectList(db.Songs, "SongId", "SongName", album.SongId);
             return View(album);
         }
 
@@ -137,7 +123,8 @@ namespace MvcLyrics.Controllers
                 return HttpNotFound();
             }
 
-            
+            ViewBag.Title = album.AlbumName;
+
             return View(album);
         }
 

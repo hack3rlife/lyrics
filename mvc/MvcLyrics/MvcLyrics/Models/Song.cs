@@ -12,13 +12,12 @@ namespace MvcLyrics.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Song()
         {
-            Albums = new HashSet<Album>();
+            Discographies = new HashSet<Discography>();
         }
 
         public int SongId { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [StringLength(255)]
         public string SongName { get; set; }
 
         [Column(TypeName = "text")]
@@ -42,10 +41,10 @@ namespace MvcLyrics.Models
         [StringLength(50)]
         public string UpdatedBy { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Album> Albums { get; set; }
-
         public virtual Category Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discography> Discographies { get; set; }
 
         public virtual Idiom Idiom { get; set; }
     }

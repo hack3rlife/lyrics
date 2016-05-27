@@ -12,13 +12,12 @@ namespace MvcLyrics.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Artist()
         {
-            Albums = new HashSet<Album>();
+            Discographies = new HashSet<Discography>();
         }
 
         public int ArtistId { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string FirstName { get; set; }
 
         [StringLength(50)]
@@ -36,9 +35,9 @@ namespace MvcLyrics.Models
         [StringLength(50)]
         public string UpdatedBy { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Album> Albums { get; set; }
-
         public virtual Country Country { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discography> Discographies { get; set; }
     }
 }

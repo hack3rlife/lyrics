@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
 
-        <li>@Html.ActionLink(item.AlbumName, "Show", "Album", new { id = item.AlbumId }, null)</li>
+        <li>@Html.ActionLink(item.AlbumName, "Show", "Albums", new { id = item.AlbumId }, null)</li>
 
     }
 
