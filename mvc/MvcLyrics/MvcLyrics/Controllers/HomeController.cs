@@ -26,14 +26,14 @@ namespace MvcLyrics.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";            
+            ViewBag.Message = "Building .NET Enterprise Applications.";            
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Us.";
 
             return View();
         }

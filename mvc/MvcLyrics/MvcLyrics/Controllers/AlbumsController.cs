@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -117,13 +118,22 @@ namespace MvcLyrics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = await db.Albums.FindAsync(id);
+            AlbumViewModel album = new AlbumViewModel();
+            album.Album = await db.Albums.FindAsync(id);
+
             if (album == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.Title = album.AlbumName;
+            ViewBag.Title = album.Album.AlbumName;
+
+            album.Discography = await db.Discographies
+                .Where(x => x.AlbumId == id)
+               .Include(d => d.Album)
+               .Include(d => d.Artist)
+               .Include(d => d.Song)
+                .ToListAsync();
 
             return View(album);
         }

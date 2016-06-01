@@ -196,14 +196,19 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\SongViewModel.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\AlbumViewModel.cs" />
+    <Compile Include="Models\ArtistViewModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Controllers\DiscographiesController.cs" />
     <Compile Include="Models\Discography.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Idiom.cs" />
     <Compile Include="Models\LatestViewModel.cs" />
     <Compile Include="Models\LyricsDbContext.cs" />
+    <Compile Include="Models\LyricsViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\Song.cs" />
@@ -320,6 +325,11 @@
     <Content Include="Views\Albums\Edit.cshtml" />
     <Content Include="Views\Albums\Index.cshtml" />
     <Content Include="Views\Albums\Show.cshtml" />
+    <Content Include="Views\Discographies\Create.cshtml" />
+    <Content Include="Views\Discographies\Delete.cshtml" />
+    <Content Include="Views\Discographies\Details.cshtml" />
+    <Content Include="Views\Discographies\Edit.cshtml" />
+    <Content Include="Views\Discographies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

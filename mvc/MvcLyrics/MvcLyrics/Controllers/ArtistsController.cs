@@ -123,14 +123,24 @@ namespace MvcLyrics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = await db.Artists.FindAsync(id);
 
-            if (artist == null)
+            ArtistViewModel artist = new ArtistViewModel();
+            artist.Artist = await db.Artists.FindAsync(id);
+
+            if (artist.Artist == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.Title = artist.FirstName;
+            ViewBag.Title = artist.Artist.FirstName;
+
+            artist.Discography = await db.Discographies
+                .Include(d => d.Album)
+                .Include(d => d.Artist)
+                .Include(d => d.Song)
+                .Where(a => a.ArtistId == id)
+                .ToListAsync();
+
             return View(artist);
         }
 

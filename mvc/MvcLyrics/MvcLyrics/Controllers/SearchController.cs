@@ -75,7 +75,6 @@ namespace MvcLyrics.Controllers
             return View(await artists.ToListAsync());
         }
 
-
         public async Task<ActionResult> Songs(string id)
         {
             if (id == null)

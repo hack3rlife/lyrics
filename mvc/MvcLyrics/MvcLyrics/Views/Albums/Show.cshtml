@@ -1,48 +1,59 @@
-﻿@model MvcLyrics.Models.Album
+﻿@using MvcLyrics.Models
 
+@model MvcLyrics.Models.AlbumViewModel
 <div>
     <h1>@ViewBag.Title</h1>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AlbumName)
+            @Html.DisplayNameFor(model => model.Album.AlbumName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlbumName)
+            @Html.DisplayFor(model => model.Album.AlbumName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            @Html.DisplayNameFor(model => model.Album.CreatedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
+            @Html.DisplayFor(model => model.Album.CreatedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.Album.CreatedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.DisplayFor(model => model.Album.CreatedBy)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastUpdate)
+            @Html.DisplayNameFor(model => model.Album.LastUpdate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastUpdate)
+            @Html.DisplayFor(model => model.Album.LastUpdate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
+            @Html.DisplayNameFor(model => model.Album.UpdatedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UpdatedBy)
+            @Html.DisplayFor(model => model.Album.UpdatedBy)
         </dd>
 
     </dl>
+</div>
+<div id="Songs">
+    <h4>Songs</h4>
+    <hr />
+    <ul>
+        @foreach (var song in Model.Discography)
+        {
+            <li>@Html.ActionLink(song.Song.SongName, "Show", "Songs", new { id = song.Song.SongId }, null)</li>
+        }
+    </ul>
 </div>

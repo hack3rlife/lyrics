@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace MvcLyrics.Models
 {
-    [Serializable]
     public class SearchViewModel
     {
         public IList<Album> Albums

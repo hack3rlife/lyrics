@@ -7,9 +7,9 @@ CREATE TABLE [Artist]
  [Name] VARCHAR(255) NOT NULL, 
  [CountryId] INT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) NULL DEFAULT ('admin'),
+ [LastUpdate] DATETIME NULL DEFAULT (GETDATE()),
+ [UpdatedBy] VARCHAR(100) NULL DEFAULT ('admin')
 )
 GO
 -- Add keys for table [Artist]
@@ -22,9 +22,9 @@ CREATE TABLE [Country]
  [CountryId] INT IDENTITY(1,1) NOT NULL,
  [CountryName] VARCHAR(255) NOT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) NULL DEFAULT ('admin'),
+ [LastUpdate] DATETIME NULL DEFAULT (GETDATE()),
+ [UpdatedBy] VARCHAR(100) NULL DEFAULT ('admin')
 )
 GO
 -- Add keys for table [Country]
@@ -37,9 +37,9 @@ CREATE TABLE [Idiom]
  [IdiomId] INT IDENTITY(1,1) NOT NULL,
  [IdiomName] VARCHAR(50) NOT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) NULL DEFAULT ('admin'),
+ [LastUpdate] DATETIME NULL DEFAULT (GETDATE()),
+ [UpdatedBy] VARCHAR(100) NULL DEFAULT ('admin')
 )
 GO
 -- Add keys for table [Idiom]
@@ -52,9 +52,9 @@ CREATE TABLE [Category]
  [CategoryId] INT IDENTITY(1,1) NOT NULL,
  [CategoryName] VARCHAR(50) NOT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) NULL DEFAULT ('admin'),
+ [LastUpdate] DATETIME NULL DEFAULT (GETDATE()),
+ [UpdatedBy] VARCHAR(100) NULL DEFAULT ('admin')
 )
 GO
 -- Add keys for table [Category]
@@ -71,9 +71,9 @@ CREATE TABLE [Song]
  [CategoryId] INT NULL,
  [IdiomId] INT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) NULL DEFAULT ('admin'),
+ [LastUpdate] DATETIME NULL DEFAULT (GETDATE()),
+ [UpdatedBy] VARCHAR(100) NULL DEFAULT ('admin')
 )
 GO
 -- Add keys for table [Song]
@@ -81,30 +81,40 @@ ALTER TABLE [Song] ADD CONSTRAINT [song_pk] PRIMARY KEY ([SongId])
 GO
 
 -- Table [Album]
-CREATE TABLE [Album]
+CREATE TABLE [dbo].[Album](
+	[AlbumId] [int] IDENTITY(1,1) NOT NULL,
+	[AlbumName] [varchar](100) NOT NULL,
+	[CreatedDate] DATETIME DEFAULT GETDATE(),
+	[CreatedBy] VARCHAR(100) DEFAULT ('admin') ,
+	[LastUpdate] DATETIME DEFAULT GETDATE(),
+	[UpdatedBy] VARCHAR(100) DEFAULT ('admin') 
+)
+GO
+ALTER TABLE [Album] ADD CONSTRAINT [album_pk] PRIMARY KEY ([AlbumId])
+GO
+
+-- Table [Discography]
+CREATE TABLE [Discography]
 (
  [ArtistId] INT NOT NULL,
  [SongId] INT NOT NULL,
- [AlbumId] INT IDENTITY(1,1) NOT NULL,
- [AlbumName] VARCHAR(255) NOT NULL,
- [TrackNum] INT NULL,
- [Length] TIME NULL,
+ [AlbumId] INT (1,1) NOT NULL,
  [CreatedDate] DATETIME DEFAULT GETDATE(),
- [CreatedBy] VARCHAR(50) NULL,
- [LastUpdate] DATETIME,
- [UpdatedBy] VARCHAR(50) NULL
+ [CreatedBy] VARCHAR(100) DEFAULT ('admin') ,
+ [LastUpdate] DATETIME DEFAULT GETDATE(),
+ [UpdatedBy] VARCHAR(100) DEFAULT ('admin') 
 )
 GO
--- Add keys for table [Album]
-ALTER TABLE [Album] ADD CONSTRAINT [album_pk] PRIMARY KEY NONCLUSTERED ([ArtistId],[SongId],[AlbumId])
-GO
-ALTER TABLE [Album] ADD CONSTRAINT [album_name] UNIQUE ([AlbumName])
+-- Add keys for table [Discography]
+ALTER TABLE [Discography] ADD CONSTRAINT [Discography_pk] PRIMARY KEY NONCLUSTERED ([ArtistId],[SongId],[AlbumId])
 GO
 
 -- Create relationships section ------------------------------------------------- 
-ALTER TABLE [Album] ADD CONSTRAINT [artist_sings_songs] FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId])
+ALTER TABLE [Discography] ADD CONSTRAINT [artist_sings_songs] FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId])
 GO
-ALTER TABLE [Album] ADD CONSTRAINT [song_sung_artists] FOREIGN KEY ([SongId]) REFERENCES [Song] ([SongId])
+ALTER TABLE [Discography] ADD CONSTRAINT [song_sung_artists] FOREIGN KEY ([SongId]) REFERENCES [Song] ([SongId])
+GO
+ALTER TABLE [Discography] ADD CONSTRAINT [album_has_songs] FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId])
 GO
 ALTER TABLE [Song] ADD CONSTRAINT [song_belongs_category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([CategoryId])
 GO
